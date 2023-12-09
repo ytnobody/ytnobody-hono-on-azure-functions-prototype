@@ -6,7 +6,7 @@ Prototype of Hono Adapter for Azure Functions v4
 
 First, you need to install [Docker Desktop](https://www.docker.com/products/docker-desktop) and [VSCode](https://code.visualstudio.com/).
 
-Then, you can boot up this project with [VSCode Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
+Then, you can boot up this project with [Dev Container](https://code.visualstudio.com/docs/remote/containers) extension.
 
 ```
 ### install deps
