@@ -8,7 +8,7 @@ app.use("*", logger());
 app.all("/api/:funcname", async (c) => {
   const message = "Hello, Azure Functions and Hono!";
   const query = c.req.queries();
-  const json_body = await c.req.json();
+  const json_body = c.req.method === "POST" ? await c.req.json() : {};
   const headers = c.req.header();
   return c.json({ message, query, json_body, headers })
 });
