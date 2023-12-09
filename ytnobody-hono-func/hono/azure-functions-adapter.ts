@@ -3,12 +3,6 @@ import {
   HttpRequest as AzureFunctionsHttpRequest
 } from "@azure/functions";
 import { Hono } from "hono";
-import { fetch, Headers, Request, Response } from "node-fetch";
-
-global.fetch = fetch;
-global.Headers = Headers;
-global.Request = Request;
-global.Response = Response;
 
 export interface AzureFunctionsHTTPEvent {
   context: AzureFunctionsContext;
@@ -58,7 +52,7 @@ const createResult = async (
     context.res.headers[key] = value;
   });
 
-  context.res.headers["Content-Type"] = contentType || "text/plain";
+  context.res.headers["Content-Type"] = contentType ?? "text/plain";
   context.res.body = await res.text();
 
   return context;
