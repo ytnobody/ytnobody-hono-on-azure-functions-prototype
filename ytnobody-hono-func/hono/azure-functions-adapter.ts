@@ -1,6 +1,6 @@
 import {
   Context as AzureFunctionsContext,
-  HttpRequest as AzureFunctionsHttpRequest,
+  HttpRequest as AzureFunctionsHttpRequest
 } from "@azure/functions";
 import { Hono } from "hono";
 import { fetch, Headers, Request, Response } from "node-fetch";
@@ -24,10 +24,9 @@ export const handle = (app: Hono) => {
   };
 };
 
-const createRequest = (event: AzureFunctionsHTTPEvent) => {
-  const queryString = extractQueryString(event);
+const createRequest = (event: AzureFunctionsHTTPEvent): Request => {
   const urlPath = event.req.url;
-  const url = queryString ? `${urlPath}?${queryString}` : urlPath;
+  const url = urlPath;
 
   const headersKV = {};
   for (const [k, v] of Object.entries(event.req.headers)) {
@@ -43,17 +42,10 @@ const createRequest = (event: AzureFunctionsHTTPEvent) => {
   };
 
   if (event.req.body) {
-    requestInit.body = event.req.body;
+    requestInit.body = JSON.stringify(event.req.body);
   }
 
   return new Request(url, requestInit);
-};
-
-const extractQueryString = (event: AzureFunctionsHTTPEvent): string => {
-  const q = event.req.query;
-  return Object.keys(q)
-    .map((k) => `${k}=${q[k]}`)
-    .join("&");
 };
 
 const createResult = async (
