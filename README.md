@@ -2,22 +2,19 @@
 
 Prototype of Hono Adapter for Azure Functions v4
 
-## Required
+## Boot up on your local machine with devcontainer
 
-* Azure Functions Core Tools - https://learn.microsoft.com/ja-jp/azure/azure-functions/functions-run-local?tabs=v4%2Clinux%2Ccsharp%2Cportal%2Cbash#v2
+First, you need to install [Docker Desktop](https://www.docker.com/products/docker-desktop) and [VSCode](https://code.visualstudio.com/).
 
-## Boot up
+Then, you can boot up this project with [VSCode Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension.
 
 ```
-
 ### install deps
-$ npm install
+$ pnpm install
 
 ### build with tsc
-$ npx tsc
+$ pnpm prestart
 
 ### run functions v4 locally
-$ func start --port=3300
-
+$ pnpm start
 ```
-
