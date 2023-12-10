@@ -10,11 +10,8 @@ Then, you can boot up this project with [Dev Container](https://code.visualstudi
 
 ```
 ### install deps
-$ pnpm install
-
-### build with tsc
-$ pnpm prestart
+$ npm install
 
 ### run functions v4 locally
-$ pnpm start
+$ npm start
 ```
