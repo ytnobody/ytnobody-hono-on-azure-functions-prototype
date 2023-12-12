@@ -1,7 +1,6 @@
-import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import { Hono } from "hono";
 import { logger } from "hono/logger";
-import { handle } from "./hono-adapter-azure-functions/handler";
+import { AzureFunction, Context, HttpRequest, handle } from "./hono-adapter-azure-functions";
 
 const app = new Hono();
 app.use("*", logger());

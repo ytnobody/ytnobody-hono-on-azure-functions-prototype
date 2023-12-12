@@ -13,7 +13,6 @@
     "hono": "^3.11.4"
   },
   "devDependencies": {
-    "@azure/functions": "^3.0.0",
     "@types/node": "18.x",
     "azure-functions-core-tools": "^4.x",
     "typescript": "^4.0.0"
