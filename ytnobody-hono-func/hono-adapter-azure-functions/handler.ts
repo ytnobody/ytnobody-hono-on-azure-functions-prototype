@@ -1,10 +1,10 @@
+import type { Hono } from 'hono'
 import type {
   Context as AzureFunctionsContext,
 } from './Context'
 import type {
   HttpRequest as AzureFunctionsHttpRequest,
 } from './http'
-import type { Hono } from 'hono'
 
 export interface AzureFunctionsHTTPEvent {
   context: AzureFunctionsContext
@@ -31,7 +31,7 @@ const createRequest = (event: AzureFunctionsHTTPEvent): Request => {
 
   const headers = new Headers(headersKV)
 
-  const method = event.req.method
+  const method = event.req.method ?? 'GET'
   const requestInit: RequestInit = {
     headers,
     method,
@@ -49,7 +49,8 @@ const createResult = async (
   res: Response
 ): Promise<AzureFunctionsContext> => {
   const contentType = res.headers.get('content-type')
-
+  if (context.res === undefined) context.res = {} 
+  
   for (const [k, v] of Object.entries(res.headers)) {
     context.res.headers[k] = v
   }
