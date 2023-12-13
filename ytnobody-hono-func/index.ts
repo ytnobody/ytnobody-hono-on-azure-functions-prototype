@@ -1,20 +1,28 @@
+import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
+
 import { Hono } from "hono";
 import { logger } from "hono/logger";
-import { AzureFunction, Context, HttpRequest, handle } from "./hono-adapter-azure-functions";
+import { handle } from "./adapter/handler";
 
-const app = new Hono();
-app.use("*", logger());
-app.all("/api/:funcname", async (c) => {
-  const message = "Hello, Azure Functions and Hono!";
-  const query = c.req.queries();
+const hono = new Hono();
+hono.use('*', logger())
+
+hono.all('/api/:funcname', async (c) => {
+  const message = 'Hello, Azure Functions and Hono!'
+  const query = c.req.queries()
   const json_body = c.req.method === "POST" ? await c.req.json() : {};
-  const headers = c.req.header();
+  const headers = c.req.header()
   return c.json({ message, query, json_body, headers })
-});
+})
 
-const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
-  context.log('HTTP trigger function processed a request.');
-  context = await handle(app)({ context, req });
+export async function httpTrigger(req: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
+    console.log(`Http function processed request for url "${JSON.stringify(req)}"`);
+    const handler = handle(hono)
+    return await handler({ context, req })
 };
 
-export default httpTrigger;
+// app.http('httpTrigger', {
+//     methods: ['GET', 'POST'],
+//     authLevel: 'anonymous',
+//     handler: httpTrigger
+// });
