@@ -10,11 +10,12 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "hono": "^3.11.4"
+    "@azure/functions": "^4.3.0",
+    "hono": "^4.0.3"
   },
   "devDependencies": {
-    "@types/node": "18.x",
-    "azure-functions-core-tools": "^4.x",
-    "typescript": "^4.0.0"
+    "@types/node": "~18.19.17",
+    "azure-functions-core-tools": "^4.0.5571",
+    "typescript": "^4.9.5"
   }
 }
